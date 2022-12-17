@@ -1,12 +1,10 @@
 # MyReads
-
 MyReads is a simple cataloging app that allows you to place books in one of three shelves or categories.
 Currently Reading
 Want to Read
 Read
 
 ## Installation
-
 
 ```bash
 $ git clone https://github.com/haitham911/myreads.git
@@ -19,9 +17,7 @@ $ npm install```
 npm start
 
 # To Visit App:
-
 localhost:3000 
-
 
 ```
 

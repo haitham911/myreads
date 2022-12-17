@@ -1,5 +1,8 @@
 import React from "react";
 import ShelfChanger from "./ShelfChanger";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+
 const Book = ({ book, UpdateBooksListState }) => {
   return (
     <li>
@@ -25,7 +28,25 @@ const Book = ({ book, UpdateBooksListState }) => {
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
           {book.authors ? book.authors.join(", ") : "Unknown Author"}
+
         </div>
+        <Popup
+            trigger={<div className="book-info">more info ....</div>}
+            modal 
+          >
+            <div>
+           
+              <div className="header" >Book title : <span>{book.title}</span> </div>
+              {' '}
+              <div className="modal-content">
+              <div className="book-title">Authors : <span>{book.authors} </span></div>
+              <div className="book-title">Categories : <span>{book.categories}</span></div>
+              <div className="book-title">Description : <span>{book.description}</span></div>
+              <div className="book-title">Pages : {book.pageCount}</div>
+              </div>
+              
+            </div>
+          </Popup>
       </div>
     </li>
   );
