@@ -1,7 +1,7 @@
 import React from "react";
 import Book from "./Books";
 
-const Bookshelf = ({ shelf, UpdateBooksListState }) => {
+const Bookshelf = ({ shelf, UpdateBooksListState,MyBooks }) => {
   return (
     <div className="bookshelf-books">
       <ol className="books-grid">
@@ -11,6 +11,7 @@ const Bookshelf = ({ shelf, UpdateBooksListState }) => {
               key={book.id}
               book={book}
               UpdateBooksListState={UpdateBooksListState}
+              MyBooks={MyBooks}
             />
           ))}
       </ol>

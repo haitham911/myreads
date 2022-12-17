@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
-const BooksSearch = ({ UpdateBooksListState }) => {
+const BooksSearch = ({ UpdateBooksListState,MyBooks }) => {
   const [bookshelf, Setbookshelf] = useState([]);
   const SetList = (list) => {
     Setbookshelf(list);
@@ -20,6 +20,7 @@ const BooksSearch = ({ UpdateBooksListState }) => {
       <SearchResults
         List={bookshelf}
         UpdateBooksListState={UpdateBooksListState}
+        MyBooks={MyBooks}
       />
     </div>
   );

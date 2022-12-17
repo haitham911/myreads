@@ -3,7 +3,7 @@ import ShelfChanger from "./ShelfChanger";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-const Book = ({ book, UpdateBooksListState }) => {
+const Book = ({ book, UpdateBooksListState,MyBooks }) => {
   return (
     <li>
       <div className="book">
@@ -23,6 +23,7 @@ const Book = ({ book, UpdateBooksListState }) => {
           <ShelfChanger
             currentBook={book}
             UpdateBooksListState={UpdateBooksListState}
+            MyBooks={MyBooks}
           />
         </div>
         <div className="book-title">{book.title}</div>

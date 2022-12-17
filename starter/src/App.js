@@ -50,7 +50,7 @@ function App() {
         />
         <Route
           path="/search"
-          element={<BooksSearch UpdateBooksListState={UpdateBooksListState} />}
+          element={<BooksSearch UpdateBooksListState={UpdateBooksListState} MyBooks={books}/>}
         />
       </Routes>
     </div>
