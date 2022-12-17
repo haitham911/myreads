@@ -1,8 +1,9 @@
 import React from "react";
 import * as BooksAPI from "./BooksAPI";
+import {useState,useEffect} from 'react';
 
-const ShelfChanger = ({ currentBook, UpdateBooksListState }) => {
-
+const ShelfChanger = ({ currentBook, UpdateBooksListState,MyBooks }) => {
+  const [book,SetBook] = useState({})
   const handleChange = (book, shelf,event) => {
     event.preventDefault();
     const updateBooks = async () => {
@@ -14,18 +15,45 @@ const ShelfChanger = ({ currentBook, UpdateBooksListState }) => {
     };
     updateBooks();
   };
-  
 
+  useEffect(()=>{
+    if (MyBooks !== undefined ){
+    
+     const setShelf = ()=>{
+      let mybook ={}
+      mybook = MyBooks.filter((current)=>{return current.id === currentBook.id})
+      if(mybook.length >0){
+        currentBook.shelf = mybook[0].shelf
+        SetBook(currentBook)
+      }else{
+        mybook =currentBook
+        mybook.shelf ="none"
+        SetBook(mybook)
+      }
+
+     }
+     setShelf()
+ 
+    }else{
+      const setCurrent = ()=>{
+        SetBook(currentBook)
+
+      }
+      setCurrent()
+    }
+    
+  })
+  
   
   return (
     <div>
     <div className="book-shelf-changer">
       <select
-        key={currentBook.id}
+        key={book.id}
         onChange={(e) => {
-          handleChange(currentBook, e.target.value,e);
+          handleChange(book, e.target.value,e);
         }}
-        value={ currentBook.shelf === undefined ? "none" :currentBook.shelf }
+        value={ book.shelf }
       >
         <option value="move" disabled>Move to... </option>
         <option value="currentlyReading">Currently Reading</option>
