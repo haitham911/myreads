@@ -7,41 +7,34 @@ import * as BooksAPI from "./BooksAPI";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [currentlyReading, setCurrentlyReading] = useState([]);
-  const [read, setRead] = useState([]);
-  const [wantToRead, setWantToRead] = useState([]);
-  const BooksListState = {
-    currentlyReading: currentlyReading,
-    wantToRead: wantToRead,
-    read: read,
-  };
+ 
+  const [books, setBooks] = useState([]);
+
+
   useEffect(() => {
     const getALLBooks = async () => {
-      let books = [];
-      books = await BooksAPI.getAll().catch((err) => {
+      let res = [];
+      res = await BooksAPI.getAll().catch((err) => {
         console.log(err);
       });
-      if (books.length > 0) {
-        setCurrentlyReading(
-          books.filter((book) => book.shelf === "currentlyReading")
-        );
-        setRead(books.filter((book) => book.shelf === "read"));
-        setWantToRead(books.filter((book) => book.shelf === "wantToRead"));
+      if (res.length > 0) {
+        setBooks(res)
       }
     };
     getALLBooks();
   }, []);
-  const UpdateBooksListState = async () => {
-    let books = [];
-    books = await BooksAPI.getAll().catch((err) => {
-      console.log(err);
-    });
-    setCurrentlyReading(
-      books.filter((book) => book.shelf === "currentlyReading")
-    );
-    setRead(books.filter((book) => book.shelf === "read"));
-    setWantToRead(books.filter((book) => book.shelf === "wantToRead"));
+  //(book, shelf)
+  const UpdateBooksListState = (book, shelf) => {
+    book.shelf = shelf;
+    if (shelf === "none") {
+      setBooks( books.filter((b) => b.id !== book.id));
+    } else {
+      book.shelf = shelf;
+      setBooks(books.filter((b) => b.id !== book.id).concat(book));
+      
+    }
   };
+
   return (
     <div className="app">
       <Routes>
@@ -50,7 +43,7 @@ function App() {
           path="/"
           element={
             <BooksList
-              BooksListState={BooksListState}
+              BooksListState={books}
               UpdateBooksListState={UpdateBooksListState}
             />
           }

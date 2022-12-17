@@ -11,18 +11,23 @@ const BooksList = ({ BooksListState, UpdateBooksListState }) => {
       </div>
       <div className="list-books-content">
         <div>
+          
           <ListContent
-            BooksListContent={BooksListState.currentlyReading}
+            BooksListContent={BooksListState.filter(book => book.shelf === "currentlyReading")}
             ListName="Currently Reading"
             UpdateBooksListState={UpdateBooksListState}
           />
+        
+
           <ListContent
-            BooksListContent={BooksListState.wantToRead}
+            BooksListContent={BooksListState.filter(book => book.shelf === "wantToRead")}
             ListName="Want to Read"
-            UpdateBooksListState={UpdateBooksListState}
+            UpdateBooksListState=  {UpdateBooksListState}
           />
+       
+
           <ListContent
-            BooksListContent={BooksListState.read}
+            BooksListContent=  {BooksListState.filter(book => book.shelf === "read")}
             ListName="Read"
             UpdateBooksListState={UpdateBooksListState}
           />
